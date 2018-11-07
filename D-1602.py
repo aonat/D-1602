@@ -24,7 +24,6 @@ def gosterIntro():
 gosterIntro()
 while(konum!=cikis or konum!=canavar):
     print(konum)
-    print(canavar)
     komut = input("Þimdi ne yapalým? ")
 
     if konum == cikis:
