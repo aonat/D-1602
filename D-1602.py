@@ -3,16 +3,16 @@
 import random
 import time
 import math
+
 konum = []
+baslangic = []
+cikis = []
+canavar =[]
 
 intro = ["Merhaba D-1602","Buraya bir deney için getirildin.","Ýlerleyebileceðin 4 adet yön, 4.096 adet oda ve sadece 1 çýkýþ var.","Bunlar sýrasýyla; Kuzey, Güney, Doðu ve Batý.","Ýlerlemek istediðin yönün ismini söyle","Umarým baþarýlý olursun","Ha unutmadan, peþinde bir canavar var!"]
 tur = 0
 
-baslangic=[random.randint(0,64),random.randint(0,64)]
-cikis=[random.randint(0,64),random.randint(0,64)]
-canavar=[random.randint(0,64),random.randint(0,64)]
-konum=baslangic
-    
+
 def gosterIntro():
     for i in range(0,6):
         print(intro[i])
@@ -21,79 +21,94 @@ def gosterIntro():
     print(intro[6])
     time.sleep(1)
 
-gosterIntro()
-while(konum!=cikis or konum!=canavar):
-    print(konum)
-    komut = input("Þimdi ne yapalým? ")
+def oyun(baslangic,cikis,canavar):
+    konum=baslangic
+    while(konum!=cikis or konum!=canavar):
+        print(konum)
+        komut = input("Þimdi ne yapalým? ")
 
-    if konum == cikis:
-        print("Tebrikler, deneyi baþarýyla geçtin!")
-        break
-    if konum == canavar:
-        print("Üzgünüm. Canavar seni yakaladý.")
-        break
-    if komut.upper()== "KUZEY":
-        konum[1] = konum[1] + 1
-        if konum[1] >= 64:
-            print("Daha fazla gidemezsin, lütfen baþka yöne git.")
-            konum[1] = konum[1] - 1
-        if abs(math.sqrt(math.pow((canavar[0]-konum[0]),2)+math.pow((canavar[1]-konum[1]),2))) < 10:
-            print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-        if abs(math.sqrt(math.pow((cikis[0]-konum[0]),2)+math.pow((cikis[1]-konum[1]),2))) < 10:
-            print("Bir ýþýk hüzmesi gözüküyor.")
-        tur = 1
-            
-    if komut.upper()== "GÜNEY":
-        konum[1] = konum[1] - 1
-        if konum[1] <=-1:
-            print("Daha fazla gidemezsin, lütfen baþka yöne git.")
+        if konum == cikis:
+            print("Tebrikler, deneyi baþarýyla geçtin!")
+            break
+        if konum == canavar:
+            print("Üzgünüm. Canavar seni yakaladý.")
+            break
+        if komut.upper()== "KUZEY":
             konum[1] = konum[1] + 1
-        if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
-            print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-        if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
-            print("Bir ýþýk hüzmesi gözüküyor.")
-        tur = 1
+            if konum[1] >= 64:
+                print("Daha fazla gidemezsin, lütfen baþka yöne git.")
+                konum[1] = konum[1] - 1
+            if abs(math.sqrt(math.pow((canavar[0]-konum[0]),2)+math.pow((canavar[1]-konum[1]),2))) < 10:
+                print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
+            if abs(math.sqrt(math.pow((cikis[0]-konum[0]),2)+math.pow((cikis[1]-konum[1]),2))) < 10:
+                print("Bir ýþýk hüzmesi gözüküyor.")
+            tur = 1
+            
+        if komut.upper()== "GÜNEY":
+            konum[1] = konum[1] - 1
+            if konum[1] <=-1:
+                print("Daha fazla gidemezsin, lütfen baþka yöne git.")
+                konum[1] = konum[1] + 1
+            if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+                print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
+            if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+                print("Bir ýþýk hüzmesi gözüküyor.")
+            tur = 1
         
-    if komut.upper()== "DOÐU":
-        konum[0] = konum[0] - 1
-        if konum[0] <= -1:
-            print("Daha fazla gidemezsin, lütfen baþka yöne git.")
-            konum[0] = konum[0] + 1
-        if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
-            print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-        if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) <10:
-            print("Bir ýþýk hüzmesi gözüküyor.")
-        tur = 1
-        
-    if komut.upper()== "BATI":
-        konum[0] = konum[0] + 1
-        if konum[0] >= 64:
-            print("Daha fazla gidemezsin, lütfen baþka yöne git.")
+        if komut.upper()== "DOÐU":
             konum[0] = konum[0] - 1
-        if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
-            print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-        if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
-            print("Bir ýþýk hüzmesi gözüküyor.")
-        tur = 1
+            if konum[0] <= -1:
+                print("Daha fazla gidemezsin, lütfen baþka yöne git.")
+                konum[0] = konum[0] + 1
+            if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+                print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
+            if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) <10:
+                print("Bir ýþýk hüzmesi gözüküyor.")
+            tur = 1
+        
+        if komut.upper()== "BATI":
+            konum[0] = konum[0] + 1
+            if konum[0] >= 64:
+                print("Daha fazla gidemezsin, lütfen baþka yöne git.")
+                konum[0] = konum[0] - 1
+            if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+                print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
+            if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+                print("Bir ýþýk hüzmesi gözüküyor.")
+            tur = 1
 
-    if canavar != konum:
-        if tur == 1 and canavar[0] < konum[0]:
-            canavar[0] = canavar[0] + 1
-            tur = 0
-        if tur == 1 and canavar[0] > konum[0]:
-            canavar[0] = canavar[0] - 1
-            tur = 0
-        if tur == 1 and canavar[1] < konum[1]:
-            canavar[1] = canavar[1] + 1
-            tur = 0
-        if tur == 1 and canavar[1] > konum[1]:
-            canavar[1] = canavar[1] - 1
-            tur = 0
+        if canavar != konum:
+            if tur == 1 and canavar[0] < konum[0]:
+                canavar[0] = canavar[0] + 1
+                tur = 0
+            if tur == 1 and canavar[0] > konum[0]:
+                canavar[0] = canavar[0] - 1
+                tur = 0
+            if tur == 1 and canavar[1] < konum[1]:
+                canavar[1] = canavar[1] + 1
+                tur = 0
+            if tur == 1 and canavar[1] > konum[1]:
+                canavar[1] = canavar[1] - 1
+                tur = 0
             
         
-    if konum == cikis:
-        print("Tebrikler, deneyi baþarýyla geçtin!")
-        break
-    if konum == canavar:
-        print("Üzgünüm. Canavar seni yakaladý.")
-        break    
+        if konum == cikis:
+            print("Tebrikler, deneyi baþarýyla geçtin!")
+            cikisCevap = input("Yeniden oynamak ister misiniz?(E/H): ")
+            if(cikisCevap.upper() == "E"):
+                oyun(baslangic=[random.randint(0,64),random.randint(0,64)],cikis=[random.randint(0,64),random.randint(0,64)],canavar=[random.randint(0,64),random.randint(0,64)])
+            else:
+                quit()
+            break
+        if konum == canavar:
+            print("Üzgünüm. Canavar seni yakaladý.")
+            canavarCevap = input("Yeniden oynamak ister misiniz?(E/H): ")
+            if(canavarCevap.upper() == "E"):
+                oyun(baslangic=[random.randint(0,64),random.randint(0,64)],cikis=[random.randint(0,64),random.randint(0,64)],canavar=[random.randint(0,64),random.randint(0,64)])
+            else:
+                quit()
+            break    
+
+gosterIntro()
+oyun(baslangic=[random.randint(0,64),random.randint(0,64)],cikis=[random.randint(0,64),random.randint(0,64)],canavar=[random.randint(0,64),random.randint(0,64)])
+
