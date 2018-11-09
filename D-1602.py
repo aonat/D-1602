@@ -8,21 +8,38 @@ konum = []
 baslangic = []
 cikis = []
 canavar =[]
+canavarKonum = 0
+intro = ["Merhaba D-1602","Buraya bir deney için getirildin.","Ýlerleyebileceðin 4 adet yön, 4.096 adet oda ve sadece 1 çýkýþ var.","Kuzeye gitmek için 'K', Güneye gitmek için 'G', Batýya gitmek için 'B', Doðuya gitmek için ise 'D' yaz.","Ok atmak için 'OK' yaz ama unutma, sadece 5 adet okun var ve oklarý sadece tam kuzeyinde/güneyinde/doðunda/batýnda olduðunda ve 10 birimden daha az mesafen varken atabilirsin.","Attýðýn her adým için 1 puan, canavarý her vuruþun için ise 5 puan kazanýrsýn.","Umarým baþarýlý olursun","Ha unutmadan, peþinde bir canavar var!"]
 
-intro = ["Merhaba D-1602","Buraya bir deney için getirildin.","Ýlerleyebileceðin 4 adet yön, 4.096 adet oda ve sadece 1 çýkýþ var.","Bunlar sýrasýyla; Kuzey, Güney, Doðu ve Batý.","Ýlerlemek istediðin yönün ismini söyle","Umarým baþarýlý olursun","Ha unutmadan, peþinde bir canavar var!"]
-tur = 0
 
+def menu():
+    menuDurum = True
+    while menuDurum == True:
+        
+        secenek = input("Þimdi ne yapalým?(OYNA/ÇIKIÞ)")
+        if secenek.upper() == "OYNA":
+            gosterIntro()
+            menuDurum = False
+            oyun(baslangic=[random.randint(0,64),random.randint(0,64)],cikis=[random.randint(0,64),random.randint(0,64)],canavar=[random.randint(0,64),random.randint(0,64)])
+        if secenek.upper() == "ÇIKIÞ":
+            menuDurum = False
+            quit()
+        if secenek.upper() != "OYNA" or secenek.upper() != "ÇIKIÞ":
+            print("Lütfen geçerli bir ifade yazýnýz.")
 
 def gosterIntro():
-    for i in range(0,6):
+    for i in range(0,8):
         print(intro[i])
         time.sleep(2)
     time.sleep(1)
-    print(intro[6])
+    print(intro[8])
     time.sleep(1)
 
 def oyun(baslangic,cikis,canavar):
     konum=baslangic
+    tur = 0
+    ok = 5
+    skor = 0
     while(konum!=cikis or konum!=canavar):
         print(konum)
         komut = input("Þimdi ne yapalým? ")
@@ -33,7 +50,7 @@ def oyun(baslangic,cikis,canavar):
         if konum == canavar:
             print("Üzgünüm. Canavar seni yakaladý.")
             break
-        if komut.upper()== "KUZEY":
+        if komut.upper()== "K":
             konum[1] = konum[1] + 1
             if konum[1] >= 64:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
@@ -42,9 +59,10 @@ def oyun(baslangic,cikis,canavar):
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
             if abs(math.sqrt(math.pow((cikis[0]-konum[0]),2)+math.pow((cikis[1]-konum[1]),2))) < 10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
-            tur = 1
+            tur = tur - 1
+            skor = skor + 1
             
-        if komut.upper()== "GÜNEY":
+        if komut.upper()== "G":
             konum[1] = konum[1] - 1
             if konum[1] <=-1:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
@@ -53,9 +71,10 @@ def oyun(baslangic,cikis,canavar):
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
             if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
-            tur = 1
+            tur = tur -1
+            skor = skor + 1
         
-        if komut.upper()== "DOÐU":
+        if komut.upper()== "D":
             konum[0] = konum[0] - 1
             if konum[0] <= -1:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
@@ -64,9 +83,10 @@ def oyun(baslangic,cikis,canavar):
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
             if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) <10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
-            tur = 1
+            tur = tur -1
+            skor = skor + 1
         
-        if komut.upper()== "BATI":
+        if komut.upper()== "B":
             konum[0] = konum[0] + 1
             if konum[0] >= 64:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
@@ -75,9 +95,18 @@ def oyun(baslangic,cikis,canavar):
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
             if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
-            tur = 1
+            tur = tur - 1
+            skor = skor + 1
+
+        if konum[1]-canavar[1]<10 or canavar[0]-konum[0]<10 or konum[0]-canavar[0]<10 or canavar[1]-konum[1]<10: 
+            if komut.upper() == "OK":
+                ok = ok -1
+                tur = 4
+                skor = skor + 5
 
         if canavar != konum:
+            if tur <1:
+                tur = 1
             if tur == 1 and canavar[0] < konum[0]:
                 canavar[0] = canavar[0] + 1
                 tur = 0
@@ -90,25 +119,38 @@ def oyun(baslangic,cikis,canavar):
             if tur == 1 and canavar[1] > konum[1]:
                 canavar[1] = canavar[1] - 1
                 tur = 0
-            
+
+        if canavar[0]<konum[0] and canavar[1]-konum[1]==0 and konum[0]-canavar[0]<11:
+            canavarKonum = konum[0] - canavar[0]
+            print("Canavar "+str(canavarKonum)+" birim batýnda!")
+        if canavar[0]>konum[0] and canavar[1]-konum[1]==0 and canavar[0]-konum[0]<11:
+            canavarKonum = canavar[0] - konum[0]
+            print("Canavar " +str(canavarKonum)+" birim doðunda!")
+        if canavar[1]<konum[1] and canavar[0]-konum[0]==0 and konum[1]-canavar[1]<11:
+            canavarKonum = konum[1] - canavar[1]
+            print("Canavar " + str(canavarKonum)+" birim güneyinde!")
+        if canavar[1]>konum[1] and canavar[0]-konum[0]==0 and canavar[1]-konum[1]<11:
+            canavarKonum = canavar[1] - konum[1]
+            print("Canavar "+ str(canavarKonum) + " birim kuzeyinde!")   
         
         if konum == cikis:
-            print("Tebrikler, deneyi baþarýyla geçtin!")
-            cikisCevap = input("Yeniden oynamak ister misiniz?(E/H): ")
+            print("Tebrikler, deneyi baþarýyla geçtin! Skorun: " + str(skor))
+            cikisCevap = input(" Yeniden oynamak ister misiniz?(E/H): ")
             if(cikisCevap.upper() == "E"):
                 oyun(baslangic=[random.randint(0,64),random.randint(0,64)],cikis=[random.randint(0,64),random.randint(0,64)],canavar=[random.randint(0,64),random.randint(0,64)])
             else:
                 quit()
             break
         if konum == canavar:
-            print("Üzgünüm. Canavar seni yakaladý.")
-            canavarCevap = input("Yeniden oynamak ister misiniz?(E/H): ")
+            print("Üzgünüm. Canavar seni yakaladý.  Skorun: " + str(skor))
+            canavarCevap = input(" Yeniden oynamak ister misiniz?(E/H): ")
             if(canavarCevap.upper() == "E"):
                 oyun(baslangic=[random.randint(0,64),random.randint(0,64)],cikis=[random.randint(0,64),random.randint(0,64)],canavar=[random.randint(0,64),random.randint(0,64)])
             else:
                 quit()
-            break    
+            break
 
-gosterIntro()
-oyun(baslangic=[random.randint(0,64),random.randint(0,64)],cikis=[random.randint(0,64),random.randint(0,64)],canavar=[random.randint(0,64),random.randint(0,64)])
+        
+
+menu()
 
