@@ -28,11 +28,11 @@ def menu():
             print("Lütfen geçerli bir ifade yazýnýz.")
 
 def gosterIntro():
-    for i in range(0,8):
+    for i in range(0,7):
         print(intro[i])
         time.sleep(2)
     time.sleep(1)
-    print(intro[8])
+    print(intro[7])
     time.sleep(1)
 
 def oyun(baslangic,cikis,canavar):
