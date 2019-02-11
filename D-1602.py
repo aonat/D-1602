@@ -55,9 +55,9 @@ def oyun(baslangic,cikis,canavar):
             if konum[1] >= 64:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
                 konum[1] = konum[1] - 1
-            if abs(math.sqrt(math.pow((canavar[0]-konum[0]),2)+math.pow((canavar[1]-konum[1]),2))) < 10:
+            if abs(math.sqrt(math.pow(canavar[0]-konum[0],2)+math.pow(canavar[1]-konum[1],2))) < 10:
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-            if abs(math.sqrt(math.pow((cikis[0]-konum[0]),2)+math.pow((cikis[1]-konum[1]),2))) < 10:
+            if abs(math.sqrt(math.pow(cikis[0]-konum[0],2)+math.pow(cikis[1]-konum[1],2))) < 10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
             tur = tur - 1
             skor = skor + 1
@@ -67,9 +67,9 @@ def oyun(baslangic,cikis,canavar):
             if konum[1] <=-1:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
                 konum[1] = konum[1] + 1
-            if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+            if abs(math.sqrt(math.pow(canavar[0]-konum[0],2)+math.pow(canavar[1]-konum[1],2))) < 10:
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-            if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+            if abs(math.sqrt(math.pow(cikis[0]-konum[0],2)+math.pow(cikis[1]-konum[1],2))) < 10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
             tur = tur -1
             skor = skor + 1
@@ -79,9 +79,9 @@ def oyun(baslangic,cikis,canavar):
             if konum[0] <= -1:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
                 konum[0] = konum[0] + 1
-            if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+            if abs(math.sqrt(math.pow(canavar[0]-konum[0],2)+math.pow(canavar[1]-konum[1],2))) < 10:
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-            if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) <10:
+            if abs(math.sqrt(math.pow(cikis[0]-konum[0],2)+math.pow(cikis[1]-konum[1],2))) < 10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
             tur = tur -1
             skor = skor + 1
@@ -91,9 +91,9 @@ def oyun(baslangic,cikis,canavar):
             if konum[0] >= 64:
                 print("Daha fazla gidemezsin, lütfen baþka yöne git.")
                 konum[0] = konum[0] - 1
-            if abs(math.sqrt(math.pow(canavar[0],2)+math.pow(canavar[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+            if abs(math.sqrt(math.pow(canavar[0]-konum[0],2)+math.pow(canavar[1]-konum[1],2))) < 10:
                 print("Týkýrtýlar gelmeye baþladý. Dikkatli ol.")
-            if abs(math.sqrt(math.pow(cikis[0],2)+math.pow(cikis[1],2)) - math.sqrt(math.pow(konum[0],2)+math.pow(konum[1],2))) < 10:
+            if abs(math.sqrt(math.pow(cikis[0]-konum[0],2)+math.pow(cikis[1]-konum[1],2))) < 10:
                 print("Bir ýþýk hüzmesi gözüküyor.")
             tur = tur - 1
             skor = skor + 1
